@@ -8,11 +8,12 @@ public record Event(
         Long id,
         String name,
         String description,
-        String identificator,
-        String local,
+        String identifier,
+        String localEvent,
         String manager,
-        LocalDateTime dataInicio,
-        LocalDateTime dataFim,
+        LocalDateTime dataStart,
+        LocalDateTime dataEnd,
+        Integer capacity,
         EventType type
 ) {
 }
