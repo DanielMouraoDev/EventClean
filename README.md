@@ -33,19 +33,23 @@ Flexibilidade: Fácil adaptação a novas funcionalidades e integrações.
 
 # Estrutura do Projeto
 
+```plaintext
 src
 ├── main
 │   ├── java
 │   │   └── com.example.eventmanagement
-│   │       ├── application  # Logica da Aplicação
-│   │       ├── domain       # Core das Regras de Negocio
-│   │       ├── infrastructure # Integração externa e DataBase
+│   │       ├── application  # Logica de Aplicação
+│   │       ├── domain       # Core das Regras de Negocios
+│   │       ├── infrastructure # Integrações Externas e Database
 │   │       └── presentation  # Controllers e REST endpoints
 │   └── resources
 │       ├── db/migration     # Flyway migrations
-│       └── application.yml  # Configuração da Aplicação
+│       └── application.yml  # Configuração da API
 └── test
-    └── java                 # Unit e testes de Integração
+    └── java                 # Unit e Testes de Integração
+```
+
+---
 
 # Começando
 
