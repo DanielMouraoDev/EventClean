@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Events")
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "tb_event")
 @Data
-public class Event {
+@AllArgsConstructor
+@NoArgsConstructor
+public class EventEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,5 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventType type;
 
-
-    }
+}
 
