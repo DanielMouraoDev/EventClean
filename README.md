@@ -40,7 +40,7 @@ src
 │   │   └── com.example.eventmanagement
 │   │       ├── application  # Logica de Aplicação
 │   │       ├── domain       # Core das Regras de Negocios
-│   │       ├── infrastructure # Integrações Externas e Database
+│   │       ├── infra # Integrações Externas e Database
 │   │       └── presentation  # Controllers e REST endpoints
 │   └── resources
 │       ├── db/migration     # Flyway migrations
@@ -78,22 +78,13 @@ http://localhost:8080/swagger-ui/index.html
 # Endpoints
 
 **Eventos**
-GET /eventos: Recupera uma lista de eventos.
+GET /events/searchevent: Recupera uma lista de eventos.
 
-POST /eventos: Cria um novo evento.
+POST /events/createevent: Cria um novo evento.
 
-PUT /eventos/{id}: Atualiza um evento pelo ID.
+PUT /events/update/{identifier}: Atualiza um evento pelo ID.
 
-DELETE /eventos/{id}: Exclui um evento pelo ID.
-
-**Locais**
-GET /locais: Recupera uma lista de locais.
-
-POST /locais: Cria um novo local.
-
-PUT /locais/{id}: Atualiza um local pelo ID.
-
-DELETE /locais/{id}: Exclui um local pelo ID.
+DELETE /events/identifier/{identifier}: Exclui um evento pelo ID.
 
 # Database Migrations
 
