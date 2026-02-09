@@ -4,5 +4,5 @@ import com.danieldev.danieldev.Core.Entities.Event;
 
 public interface UpdateEventCase {
 
-    public Event execute(Event event);
+    Event execute(String identifier, Event eventData);
 }

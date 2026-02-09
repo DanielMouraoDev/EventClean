@@ -1,9 +1,7 @@
 package com.danieldev.danieldev.Infra.Presentation;
 
 import com.danieldev.danieldev.Core.Entities.Event;
-import com.danieldev.danieldev.Core.Usecases.CreateEventCase;
-import com.danieldev.danieldev.Core.Usecases.FilterIdentificatorCase;
-import com.danieldev.danieldev.Core.Usecases.SearchEventCase;
+import com.danieldev.danieldev.Core.Usecases.*;
 import com.danieldev.danieldev.Infra.DTOs.EventDto;
 import com.danieldev.danieldev.Infra.Mapper.EventDtoMapper;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("api/v1/events")
@@ -20,23 +17,31 @@ public class EventController {
 
     private final CreateEventCase createEventCase;
     private final SearchEventCase searchEventCase;
+    private final FilterIdentifierCase filterIdentifierCase;
+    private final DeleteEventCase deleteEventCase;
+    private final UpdateEventCase updateEventCase; // Novo Use Case injetado
     private final EventDtoMapper eventDtoMapper;
-    private final FilterIdentificatorCase filterIdentificatorCase;
 
-
-    public EventController(CreateEventCase createEventCase, SearchEventCase searchEventCase, EventDtoMapper eventDtoMapper, FilterIdentificatorCase filterIdentificatorCase) {
+    // Construtor completo com todas as dependências
+    public EventController(CreateEventCase createEventCase,
+                           SearchEventCase searchEventCase,
+                           FilterIdentifierCase filterIdentifierCase,
+                           DeleteEventCase deleteEventCase,
+                           UpdateEventCase updateEventCase,
+                           EventDtoMapper eventDtoMapper) {
         this.createEventCase = createEventCase;
         this.searchEventCase = searchEventCase;
+        this.filterIdentifierCase = filterIdentifierCase;
+        this.deleteEventCase = deleteEventCase;
+        this.updateEventCase = updateEventCase;
         this.eventDtoMapper = eventDtoMapper;
-        this.filterIdentificatorCase = filterIdentificatorCase;
     }
-
 
     @PostMapping("createevent")
     public ResponseEntity<Map<String, Object>> createEvent(@RequestBody EventDto eventoDto) {
         Event newEvent = createEventCase.execute(eventDtoMapper.toDomain(eventoDto));
         Map<String, Object> response = new HashMap<>();
-        response.put("Menssagem:", "Evento cadastrado com sucesso no nosso banco de dados!");
+        response.put("Menssagem:", "Evento cadastrado com sucesso!");
         response.put("Dados do Evento", eventDtoMapper.toDto(newEvent));
         return ResponseEntity.ok(response);
     }
@@ -49,9 +54,28 @@ public class EventController {
                 .toList();
     }
 
-    @GetMapping("/identificator/{identificator}")
-    public ResponseEntity<EventDto> searchByIdentificator(@PathVariable String identificator) {
-        Event event = filterIdentificatorCase.execute(identificator);
+    @GetMapping("/identifier/{identifier}")
+    public ResponseEntity<EventDto> searchByIdentifier(@PathVariable String identifier) {
+        Event event = filterIdentifierCase.execute(identifier);
         return ResponseEntity.ok(eventDtoMapper.toDto(event));
+    }
+
+    @DeleteMapping("/identifier/{identifier}")
+    public ResponseEntity<Map<String, String>> deleteByIdentifier(@PathVariable String identifier) {
+        deleteEventCase.execute(identifier);
+        Map<String, String> response = new HashMap<>();
+        response.put("Mensagem", "Evento " + identifier + " removido com sucesso!");
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update/{identifier}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable String identifier, @RequestBody EventDto eventDto) {
+        Event updatedEvent = updateEventCase.execute(identifier, eventDtoMapper.toDomain(eventDto));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("Mensagem:", "Evento atualizado com sucesso!");
+        response.put("Dados Atualizados", eventDtoMapper.toDto(updatedEvent));
+
+        return ResponseEntity.ok(response);
     }
 }

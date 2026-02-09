@@ -1,4 +1,4 @@
--- V1_create_table_event.sql
+-- V1__create_table_event.sql
 
      CREATE TABLE tb_event (
          id BIGSERIAL PRIMARY KEY,

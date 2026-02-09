@@ -4,5 +4,5 @@ import com.danieldev.danieldev.Core.Entities.Event;
 
 public interface DeleteEventCase {
 
-    public Event execute(Event event);
+    void execute(String id);
 }

@@ -1,22 +1,14 @@
 package com.danieldev.danieldev.Core.Usecases;
 
-    public class CreateIdentifierCaseImpl implements CreateIdentifierCase {
+import java.util.UUID;
+
+public class CreateIdentifierCaseImpl implements CreateIdentifierCase {
 
         @Override
         public String execute() {
-            int length = 6;
-            String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    + "0123456789"
-                    + "abcdefghijklmnopqrstuvwxyz";
-
-            StringBuilder sb = new StringBuilder(length);
-
-            for (int i = 0; i < length; i++) {
-                int index = (int) (alphaNumericString.length() * Math.random());
-                sb.append(alphaNumericString.charAt(index));
-            }
-
-            return sb.toString();
+            UUID uuid = UUID.randomUUID();
+            String codigoAleatorio = uuid.toString().substring(0, 8).toUpperCase();
+            return String.format("EVT-2026-%s", codigoAleatorio);
         }
     }
 

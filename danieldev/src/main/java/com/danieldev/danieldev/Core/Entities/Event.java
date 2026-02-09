@@ -5,7 +5,7 @@ import com.danieldev.danieldev.Core.Enums.EventType;
 import java.time.LocalDateTime;
 
 public record Event(
-        Long id,
+        String id,
         String name,
         String description,
         String identifier,

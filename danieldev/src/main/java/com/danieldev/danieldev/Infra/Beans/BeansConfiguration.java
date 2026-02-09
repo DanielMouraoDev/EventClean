@@ -1,20 +1,21 @@
 package com.danieldev.danieldev.Infra.Beans;
 
 import com.danieldev.danieldev.Core.Gateway.EventGateway;
-import com.danieldev.danieldev.Core.Usecases.CreateEventCaseImpl;
-import com.danieldev.danieldev.Core.Usecases.FilterIdentificatorCase;
-import com.danieldev.danieldev.Core.Usecases.FilterIdentificatorCaseImpl;
-import com.danieldev.danieldev.Core.Usecases.SearchEventCaseImpl;
+import com.danieldev.danieldev.Core.Usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeansConfiguration {
 
+    @Bean
+    public CreateIdentifierCase createIdentifierCase() {
+        return new CreateIdentifierCaseImpl();
+    }
 
     @Bean
-    public CreateEventCaseImpl createEventCase(EventGateway eventGateway) {
-        return new CreateEventCaseImpl(eventGateway);
+    public CreateEventCaseImpl createEventCase(EventGateway eventGateway, CreateIdentifierCase identifierCase) {
+        return new CreateEventCaseImpl(eventGateway, identifierCase);
     }
 
     @Bean
@@ -23,7 +24,17 @@ public class BeansConfiguration {
     }
 
     @Bean
-    public FilterIdentificatorCaseImpl filterIdentificatorCase(EventGateway eventGateway) {
-        return new FilterIdentificatorCaseImpl(eventGateway);
+    public FilterIdentifierCaseImpl filterIdentificatorCase(EventGateway eventGateway) {
+        return new FilterIdentifierCaseImpl(eventGateway);
+    }
+
+    @Bean
+    public DeleteEventCaseImpl deleteEventCase(EventGateway eventGateway) {
+        return new DeleteEventCaseImpl(eventGateway);
+    }
+
+    @Bean
+    public UpdateEventCase updateEventCase (EventGateway eventGateway) {
+        return new UpdateEventCaseImpl(eventGateway);
     }
 }

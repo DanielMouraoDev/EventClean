@@ -4,11 +4,11 @@ import com.danieldev.danieldev.Core.Entities.Event;
 import com.danieldev.danieldev.Core.Gateway.EventGateway;
 import com.danieldev.danieldev.Infra.Exception.EventNotFoundException;
 
-public class FilterIdentificatorCaseImpl implements FilterIdentificatorCase{
+public class FilterIdentifierCaseImpl implements FilterIdentifierCase {
 
     private final EventGateway eventGateway;
 
-    public FilterIdentificatorCaseImpl(EventGateway eventGateway) {
+    public FilterIdentifierCaseImpl(EventGateway eventGateway) {
         this.eventGateway = eventGateway;
     }
 

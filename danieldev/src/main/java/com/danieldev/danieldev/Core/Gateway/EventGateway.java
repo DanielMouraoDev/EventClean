@@ -11,4 +11,8 @@ public interface EventGateway {
     List<Event> searchEvent();
     boolean existsByIdentifier(String identificator);
     Optional<Event> filterEventIdentificator(String identificator);
+    String idUnico = java.util.UUID.randomUUID().toString();
+    void deleteByIdentifier(String identifier);
+    Optional<Event> findByIdentifier(String identifier);
+    Event updateEvent(Event event);
 }

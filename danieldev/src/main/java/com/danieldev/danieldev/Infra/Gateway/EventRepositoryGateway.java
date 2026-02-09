@@ -41,4 +41,21 @@ public class EventRepositoryGateway implements EventGateway {
         return eventRepository.findByIdentifier(identificator)
                 .map(mapper::toDomain);
     }
+
+    @Override
+    public void deleteByIdentifier(String identifier) {
+        eventRepository.deleteByIdentifier(identifier);
+
+    }
+
+    @Override
+    public Event updateEvent(Event event) {
+        return null;
+    }
+
+    @Override
+    public Optional<Event> findByIdentifier(String identifier) {
+        // O seu Repository já deve ter esse método findByIdentifier
+        return eventRepository.findByIdentifier(identifier).map(mapper::toDomain);
+    }
 }
