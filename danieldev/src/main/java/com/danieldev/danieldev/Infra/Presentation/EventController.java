@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/events")
+@RequestMapping("api/v2/events")
 public class EventController {
 
     private final CreateEventCase createEventCase;
@@ -22,7 +22,7 @@ public class EventController {
     private final UpdateEventCase updateEventCase; // Novo Use Case injetado
     private final EventDtoMapper eventDtoMapper;
 
-    // Construtor completo com todas as dependências
+
     public EventController(CreateEventCase createEventCase,
                            SearchEventCase searchEventCase,
                            FilterIdentifierCase filterIdentifierCase,
